@@ -1,0 +1,76 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "🚀 Start Full App (Recommended)",
+      "type": "node",
+      "request": "launch",
+      "configurations": [
+        {
+          "name": "Start Backend",
+          "type": "node",
+          "request": "launch",
+          "program": "${workspaceFolder}/src/server-side/index-mock.js",
+          "console": "integratedTerminal",
+          "cwd": "${workspaceFolder}/src/server-side"
+        },
+        {
+          "name": "Start Frontend",
+          "type": "node",
+          "request": "launch",
+          "program": "${workspaceFolder}/node_modules/.bin/react-scripts",
+          "args": ["start"],
+          "console": "integratedTerminal",
+          "cwd": "${workspaceFolder}"
+        }
+      ],
+      "dependsOrder": "parallel",
+      "dependsOn": ["Start Backend", "Start Frontend"]
+    }
+  ],
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "🚀 Start Full Application",
+        "dependsOrder": "parallel",
+        "dependsOn": [
+          "Start Backend Server",
+          "Start Frontend Server"
+        ]
+      },
+      {
+        "label": "Start Backend Server",
+        "type": "shell",
+        "command": "node",
+        "args": ["index-mock.js"],
+        "options": {
+          "cwd": "${workspaceFolder}/src/server-side"
+        },
+        "group": "build",
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "focus": false,
+          "panel": "new"
+        }
+      },
+      {
+        "label": "Start Frontend Server",
+        "type": "shell",
+        "command": "npm",
+        "args": ["start"],
+        "options": {
+          "cwd": "${workspaceFolder}"
+        },
+        "group": "build",
+        "presentation": {
+          "echo": true,
+          "reveal": "always",
+          "focus": false,
+          "panel": "new"
+        }
+      }
+    ]
+  }
+}
